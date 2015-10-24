@@ -7,10 +7,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (Msg)
 	{
-	case WM_DESTROY:
+	case WM_CLOSE:
 		PostQuitMessage(0);
 		break;
-
+	case WM_SYSCOMMAND:
+		if (wParam == SC_CLOSE && MessageBox(hWnd, "Are you sure you want to quit?", "Confirm", MB_YESNO) == IDNO)
+			break;
+		// Fall through
 	default:
 		return DefWindowProcA(hWnd, Msg, wParam, lParam);
 	}
@@ -54,12 +57,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	while (true)
 	{
 		bool bQuit = false;
-		
+
 		MSG msg;
 		while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
 			if (msg.message == WM_QUIT)
 			{
+
 				bQuit = true;
 				break;
 			}
