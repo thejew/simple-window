@@ -54,24 +54,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	ShowWindow(hWnd, nCmdShow);
 
-	while (true)
+	bool bQuit = false;
+	while (!bQuit)
 	{
-		bool bQuit = false;
-
 		MSG msg;
 		while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
-			if (msg.message == WM_QUIT)
-			{
-
-				bQuit = true;
+			if (bQuit = (msg.message == WM_QUIT))
 				break;
-			}
+
 			TranslateMessage(&msg);
 			DispatchMessageA(&msg);
 		}
 
-		if (bQuit) break;
 	}
 
 	return 0;
