@@ -20,6 +20,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
+static void OnSetup(HWND hWnd)
+{
+	// DO SETUP
+}
+
 static void OnIdle()
 {
 	// DO IDLE THINGS HERE
@@ -56,6 +61,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		hInstance,
 		NULL
 		);
+		
+	OnSetup(hWnd);
 
 	ShowWindow(hWnd, nCmdShow);
 
